@@ -26,7 +26,9 @@ public class Night extends Object {
         gameObjects.addGameObject(night, layer);
 
         new Transition<Float>(
-                night,night.renderer()::setOpaqueness,0f,
+                night,
+                night.renderer()::setOpaqueness,
+                0f,
                 MIDNIGHT_OPACITY,
                 Transition.CUBIC_INTERPOLATOR_FLOAT,
                 cycleLength/2,
