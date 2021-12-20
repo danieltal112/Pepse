@@ -41,8 +41,8 @@ public class Terrain extends Object {
         int[] fixMinMax = fixRange(minX, maxX);
         minX = fixMinMax[0];
         maxX = fixMinMax[1];
-        Renderable renderable = new RectangleRenderable(ColorSupplier.approximateColor(BASE_GROUND_COLOR));
 
+        Renderable renderable = new RectangleRenderable(ColorSupplier.approximateColor(BASE_GROUND_COLOR));
         for (int i = minX; i <= maxX; i+=30) {
             GameObject ground = new Block(Vector2.ZERO, renderable);
             ground.setDimensions(new Vector2(Block.SIZE, windowDimensions.y() - groundHeightAt(i)));
