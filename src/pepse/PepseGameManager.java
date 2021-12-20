@@ -9,6 +9,7 @@ import pepse.world.Sky;
 import pepse.world.Terrain;
 import pepse.world.daynight.Night;
 import pepse.world.daynight.Sun;
+import pepse.world.daynight.SunHalo;
 
 public class PepseGameManager extends GameManager {
     private static final float CYCLE_LENGTH = 30;
@@ -28,10 +29,11 @@ public class PepseGameManager extends GameManager {
         Terrain terrain = new Terrain(gameObjects(), Layer.STATIC_OBJECTS, windowController.getWindowDimensions(), 3);
         terrain.createInRange(0, (int) windowController.getWindowDimensions().x());
         //create night
-        Night.create(gameObjects(), Layer.FOREGROUND, windowController.getWindowDimensions(), CYCLE_LENGTH);
+        //Night.create(gameObjects(), Layer.FOREGROUND, windowController.getWindowDimensions(), CYCLE_LENGTH);
 
         //create sun
         Sun.create(gameObjects(),Layer.BACKGROUND,windowController.getWindowDimensions(),30);
+
 
     }
 

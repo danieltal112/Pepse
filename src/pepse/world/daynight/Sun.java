@@ -2,6 +2,7 @@ package pepse.world.daynight;
 
 import danogl.GameObject;
 import danogl.collisions.GameObjectCollection;
+import danogl.collisions.Layer;
 import danogl.components.CoordinateSpace;
 import danogl.components.Transition;
 import danogl.gui.rendering.OvalRenderable;
@@ -15,8 +16,14 @@ import java.awt.*;
 public class Sun extends Object {
 
     private static Vector2 calcSunPosition(Vector2 windowDimensions, float angleInSky) {
+        Vector2 m = new Vector2(windowDimensions.x() / 2, windowDimensions.y() / 2);
+        float r = windowDimensions.y() / 2 - 100;
+        float x = 0;
+        float y = 0;
 
-        return Vector2.ZERO;
+        x = (windowDimensions.x() / 2) - (r * (float) Math.sin(angleInSky));
+        y = windowDimensions.y() / 2 + r * (float) Math.cos(angleInSky);
+        return new Vector2(x, y);
     }
 
     public static GameObject create(GameObjectCollection gameObjects,
@@ -28,11 +35,9 @@ public class Sun extends Object {
         sun.setCenter(new Vector2(windowDimensions.x() / 2, 100));
         sun.setCoordinateSpace(CoordinateSpace.CAMERA_COORDINATES);
         sun.setTag("sun");
-        gameObjects.addGameObject(sun, layer);
         new Transition<Float>(
                 sun,
-                //todo
-                sun.renderer()::setOpaqueness,
+                (Float angle) -> sun.setCenter(calcSunPosition(windowDimensions, angle)),
                 0f,
                 360f,
                 Transition.LINEAR_INTERPOLATOR_FLOAT,
@@ -40,6 +45,8 @@ public class Sun extends Object {
                 Transition.TransitionType.TRANSITION_LOOP,
                 null);
 
+        SunHalo.create(gameObjects, layer, sun, new Color(255, 255, 0, 20));
+        gameObjects.addGameObject(sun, layer);
         return sun;
     }
 }
