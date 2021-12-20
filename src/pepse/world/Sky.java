@@ -22,8 +22,8 @@ public class Sky extends Object {
                 Vector2.ZERO, windowDimensions,
                 new RectangleRenderable(BASIC_SKY_COLOR));
         sky.setCoordinateSpace(CoordinateSpace.CAMERA_COORDINATES);
-        gameObjects.addGameObject(sky, skyLayer);
         sky.setTag("sky");
+        gameObjects.addGameObject(sky, skyLayer);
         return sky;
     }
 }
