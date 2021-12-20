@@ -26,7 +26,7 @@ public class PepseGameManager extends GameManager {
         //create ground
         Terrain terrain=new Terrain(gameObjects(),Layer.STATIC_OBJECTS,windowController.getWindowDimensions(),3);
         terrain.createInRange(1,2);
-//        Ortal's comment
+//        Ortal's comment (BLA BLA)
 
     }
 
