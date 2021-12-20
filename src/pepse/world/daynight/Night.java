@@ -11,10 +11,21 @@ import pepse.util.ColorSupplier;
 
 import java.awt.*;
 
+/**
+ *
+ */
 public class Night extends Object {
 
     private static final Float MIDNIGHT_OPACITY = 0.5f;
 
+    /**
+     *
+     * @param gameObjects
+     * @param layer
+     * @param windowDimensions
+     * @param cycleLength
+     * @return
+     */
     public static GameObject create(GameObjectCollection gameObjects,
                                     int layer,
                                     Vector2 windowDimensions,

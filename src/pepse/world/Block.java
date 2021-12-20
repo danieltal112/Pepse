@@ -6,10 +6,17 @@ import danogl.gui.rendering.Renderable;
 import danogl.util.Vector2;
 
 
+/**
+ *
+ */
 public class Block extends GameObject {
     public static final int SIZE = 30;
 
-
+    /**
+     *
+     * @param topLeftCorner
+     * @param renderable
+     */
     public Block(Vector2 topLeftCorner, Renderable renderable) {
         super(topLeftCorner, Vector2.ONES.mult(SIZE), renderable);
 

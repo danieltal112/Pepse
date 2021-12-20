@@ -15,6 +15,13 @@ public class Sky extends Object {
     private static final Color BASIC_SKY_COLOR = Color.decode("#80C6E5");
 
 
+    /**
+     *
+     * @param gameObjects
+     * @param windowDimensions
+     * @param skyLayer
+     * @return
+     */
     public static GameObject create(GameObjectCollection gameObjects,
                                     Vector2 windowDimensions,
                                     int skyLayer) {

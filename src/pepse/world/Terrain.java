@@ -10,6 +10,9 @@ import pepse.util.ColorSupplier;
 
 import java.awt.*;
 
+/**
+ *
+ */
 public class Terrain extends Object {
 
     private GameObjectCollection gameObjects;
@@ -17,7 +20,6 @@ public class Terrain extends Object {
     private Vector2 windowDimensions;
     private int seed;
     private static final Color BASE_GROUND_COLOR = new Color(212, 123, 74);
-    private static final int TERRAIN_DEPTH = 20;
 
     //constructor
     public Terrain(GameObjectCollection gameObjects,
@@ -31,12 +33,22 @@ public class Terrain extends Object {
 
     }
 
-
+    /**
+     *
+     * @param x
+     * @return
+     */
     //todo
     public float groundHeightAt(float x) {
+
         return (float) 500 + x%100;
     }
 
+    /**
+     *
+     * @param minX
+     * @param maxX
+     */
     public void createInRange(int minX, int maxX) {
         int[] fixMinMax = fixRange(minX, maxX);
         minX = fixMinMax[0];
@@ -53,6 +65,12 @@ public class Terrain extends Object {
         }
     }
 
+    /**
+     *
+     * @param minX
+     * @param maxX
+     * @return
+     */
     private int[] fixRange(int minX, int maxX) {
         int[] fixMinMax = new int[2];
 

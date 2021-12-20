@@ -13,8 +13,17 @@ import pepse.util.ColorSupplier;
 
 import java.awt.*;
 
+/**
+ *
+ */
 public class Sun extends Object {
 
+    /**
+     *
+     * @param windowDimensions
+     * @param angleInSky
+     * @return
+     */
     private static Vector2 calcSunPosition(Vector2 windowDimensions, float angleInSky) {
         float radius = windowDimensions.y() / 2;
         float x = 0;
@@ -25,6 +34,14 @@ public class Sun extends Object {
         return new Vector2(x, y);
     }
 
+    /**
+     *
+     * @param gameObjects
+     * @param layer
+     * @param windowDimensions
+     * @param cycleLength
+     * @return
+     */
     public static GameObject create(GameObjectCollection gameObjects,
                                     int layer,
                                     Vector2 windowDimensions,

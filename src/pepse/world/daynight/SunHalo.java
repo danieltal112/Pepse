@@ -9,8 +9,19 @@ import danogl.util.Vector2;
 
 import java.awt.*;
 
+/**
+ *
+ */
 public class SunHalo extends Object {
 
+    /**
+     *
+     * @param gameObjects
+     * @param layer
+     * @param sun
+     * @param color
+     * @return
+     */
     public static GameObject create(GameObjectCollection gameObjects,
                                     int layer,
                                     GameObject sun,

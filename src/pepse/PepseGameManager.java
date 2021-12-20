@@ -8,10 +8,20 @@ import pepse.world.Terrain;
 import pepse.world.daynight.Night;
 import pepse.world.daynight.Sun;
 
+/**
+ *
+ */
 public class PepseGameManager extends GameManager {
     private static final float CYCLE_NIGHT = 30;
     private static final float CYCLE_SUN = 1200;
 
+    /**
+     *
+     * @param imageReader
+     * @param soundReader
+     * @param inputListener
+     * @param windowController
+     */
     @Override
     public void initializeGame(danogl.gui.ImageReader imageReader,
                                SoundReader soundReader,
@@ -35,6 +45,10 @@ public class PepseGameManager extends GameManager {
 
     }
 
+    /**
+     *
+     * @param args
+     */
     public static void main(String[] args) {
         new PepseGameManager().run();
     }
