@@ -16,13 +16,12 @@ import java.awt.*;
 public class Sun extends Object {
 
     private static Vector2 calcSunPosition(Vector2 windowDimensions, float angleInSky) {
-        Vector2 m = new Vector2(windowDimensions.x() / 2, windowDimensions.y() / 2);
-        float r = windowDimensions.y() / 2 - 100;
+        float radius = windowDimensions.y() / 2;
         float x = 0;
         float y = 0;
 
-        x = (windowDimensions.x() / 2) - (r * (float) Math.sin(angleInSky));
-        y = windowDimensions.y() / 2 + r * (float) Math.cos(angleInSky);
+        x = (windowDimensions.x() / 2) - (radius * (float) Math.cos(angleInSky));
+        y = windowDimensions.y() / 2 + radius * (float) Math.sin(angleInSky);
         return new Vector2(x, y);
     }
 

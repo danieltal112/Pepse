@@ -21,8 +21,7 @@ public class SunHalo extends Object {
         sunHalo.setCoordinateSpace(CoordinateSpace.CAMERA_COORDINATES);
         sunHalo.setTag("sunHalo");
         gameObjects.addGameObject(sunHalo, layer);
-
-       // sunHalo.addComponent();
+        sunHalo.addComponent(num->sunHalo.setCenter(sun.getCenter()));
         return sunHalo;
 
     }
