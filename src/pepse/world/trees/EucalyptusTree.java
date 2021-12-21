@@ -55,7 +55,7 @@ public class EucalyptusTree {
         for (float y = 1; y <= 3; y++) {
             for (float x = 1; x <= 5; x++) {
                 if ((y < 3 || x != 3) && random.nextInt(100) > 10) {
-                    GameObject learAlon = new GameObject(Vector2.ZERO, Vector2.ONES.mult(Block.SIZE), new RectangleRenderable(new Color(50, 200, 30)));
+                    GameObject learAlon = new GameObject(Vector2.ZERO, Vector2.ONES.mult(Block.SIZE), new RectangleRenderable(new Color(60, 230, 60)));
                     learAlon.setTopLeftCorner(new Vector2(xx + (30 * x), yy + (30 * y)));
                     learAlon.setCoordinateSpace(CoordinateSpace.CAMERA_COORDINATES);
                     gameObjects.addGameObject(learAlon);
