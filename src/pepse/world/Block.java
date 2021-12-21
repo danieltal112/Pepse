@@ -13,7 +13,6 @@ public class Block extends GameObject {
     public static final int SIZE = 30;
 
     /**
-     *
      * @param topLeftCorner
      * @param renderable
      */

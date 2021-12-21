@@ -16,7 +16,7 @@ import java.awt.*;
 /**
  *
  */
-public class Sun extends Object {
+public class Sun {
 
     /**
      *

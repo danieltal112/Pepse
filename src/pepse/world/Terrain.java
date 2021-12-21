@@ -13,7 +13,7 @@ import java.awt.*;
 /**
  *
  */
-public class Terrain extends Object {
+public class Terrain {
 
     private GameObjectCollection gameObjects;
     private int groundLayer;
@@ -34,18 +34,16 @@ public class Terrain extends Object {
     }
 
     /**
-     *
      * @param x
      * @return
      */
     //todo
     public float groundHeightAt(float x) {
 
-        return (float) 500 + x%100;
+        return (float) 750 + x % 100;
     }
 
     /**
-     *
      * @param minX
      * @param maxX
      */
@@ -55,7 +53,7 @@ public class Terrain extends Object {
         maxX = fixMinMax[1];
 
         Renderable renderable = new RectangleRenderable(ColorSupplier.approximateColor(BASE_GROUND_COLOR));
-        for (int i = minX; i <= maxX; i+=30) {
+        for (int i = minX; i <= maxX; i += 30) {
             GameObject ground = new Block(Vector2.ZERO, renderable);
             ground.setDimensions(new Vector2(Block.SIZE, windowDimensions.y() - groundHeightAt(i)));
             ground.setTopLeftCorner(new Vector2(i, groundHeightAt(i)));
@@ -66,7 +64,6 @@ public class Terrain extends Object {
     }
 
     /**
-     *
      * @param minX
      * @param maxX
      * @return
@@ -81,7 +78,7 @@ public class Terrain extends Object {
         }
         fixMinMax[0] = minX;
         int counter = minX;
-        while (counter+30 <= maxX) {
+        while (counter + 30 <= maxX) {
             counter += 30;
         }
         fixMinMax[1] = counter;

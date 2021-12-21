@@ -7,6 +7,7 @@ import pepse.world.Sky;
 import pepse.world.Terrain;
 import pepse.world.daynight.Night;
 import pepse.world.daynight.Sun;
+import pepse.world.trees.Tree;
 
 /**
  *
@@ -16,7 +17,6 @@ public class PepseGameManager extends GameManager {
     private static final float CYCLE_SUN = 1200;
 
     /**
-     *
      * @param imageReader
      * @param soundReader
      * @param inputListener
@@ -40,13 +40,14 @@ public class PepseGameManager extends GameManager {
         Night.create(gameObjects(), Layer.FOREGROUND, windowController.getWindowDimensions(), CYCLE_NIGHT);
 
         //create sun
-        Sun.create(gameObjects(),Layer.BACKGROUND,windowController.getWindowDimensions(),CYCLE_SUN);
-
+        Sun.create(gameObjects(), Layer.BACKGROUND, windowController.getWindowDimensions(), CYCLE_SUN);
+        //create tree
+        Tree tree = new Tree(gameObjects(), terrain);
+        tree.createInRange(0, (int) windowController.getWindowDimensions().x());
 
     }
 
     /**
-     *
      * @param args
      */
     public static void main(String[] args) {
