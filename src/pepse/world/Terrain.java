@@ -78,7 +78,7 @@ public class Terrain {
         }
         fixMinMax[0] = minX;
         int counter = minX;
-        while (counter + 30 <= maxX) {
+        while (counter  <= maxX) {
             counter += 30;
         }
         fixMinMax[1] = counter;

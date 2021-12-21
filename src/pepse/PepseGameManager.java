@@ -43,7 +43,7 @@ public class PepseGameManager extends GameManager {
         Sun.create(gameObjects(), Layer.BACKGROUND, windowController.getWindowDimensions(), CYCLE_SUN);
         //create tree
         Tree tree = new Tree(gameObjects(), terrain);
-        tree.createInRange(0, (int) windowController.getWindowDimensions().x());
+        tree.createInRange(14, (int) windowController.getWindowDimensions().x());
 
     }
 
