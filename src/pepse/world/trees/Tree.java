@@ -65,7 +65,7 @@ public class Tree {
         return eucalyptus;
     }
     private GameObject makeLeafAlon() {
-
+        return null;
     }
 
     private Block treeRandom(int x) {
