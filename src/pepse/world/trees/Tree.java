@@ -19,10 +19,10 @@ public class Tree {
     private GameObjectCollection gameObjects;
     private Terrain terrain;
     private Random random = new Random();
-    private final int MIN_ALON_HEIGHT = 200;
-    private final int MAX_MORE_ALON_HEIGHT = 100;
-    private final int MIN_EUCALYPTUS_HEIGHT = 100;
-    private final int MAX_MORE_EUCALYPTUS_HEIGHT = 50;
+    private final int MIN_ALON_HEIGHT = 300;
+    private final int MAX_MORE_ALON_HEIGHT = 200;
+    private final int MIN_EUCALYPTUS_HEIGHT = 200;
+    private final int MAX_MORE_EUCALYPTUS_HEIGHT = 150;
 
 
     public Tree(GameObjectCollection gameObjects, Terrain terrain) {
@@ -38,9 +38,8 @@ public class Tree {
 
 
     private boolean randomToPlant() {
-
         int num = random.nextInt(100);
-        if (num <= 10) {
+        if (num <= 15) {
             return true;
         }
         return false;
@@ -66,15 +65,16 @@ public class Tree {
     }
 
     private void makeLeafAlon(Vector2 corner) {
-        float xx = corner.x() - 90;
-        float yy = corner.y() - 150;
-        for (float y = 1; y <= 5; y++) {
-            for (float x = 1; x <= 5; x++) {
-
-                GameObject learAlon = new GameObject(Vector2.ZERO, Vector2.ONES.mult(Block.SIZE), new RectangleRenderable(new Color(50, 200, 30)));
-                learAlon.setTopLeftCorner(new Vector2(xx+(30*x), yy+(30*y)));
-                learAlon.setCoordinateSpace(CoordinateSpace.CAMERA_COORDINATES);
-                gameObjects.addGameObject(learAlon);
+        float xx = corner.x() - 60;
+        float yy = corner.y() - 120;
+        for (float y = 1; y <= 6; y++) {
+            for (float x = 1; x <= 3; x++) {
+                if (y < 5 || x != 2) {
+                    GameObject learAlon = new GameObject(Vector2.ZERO, Vector2.ONES.mult(Block.SIZE), new RectangleRenderable(new Color(50, 200, 30)));
+                    learAlon.setTopLeftCorner(new Vector2(xx + (30 * x), yy + (30 * y)));
+                    learAlon.setCoordinateSpace(CoordinateSpace.CAMERA_COORDINATES);
+                    gameObjects.addGameObject(learAlon);
+                }
             }
 
         }
@@ -82,14 +82,15 @@ public class Tree {
 
     private void makeLeafEucalyptus(Vector2 corner) {
         float xx = corner.x() - 90;
-        float yy = corner.y() - 150;
-        for (float y = 1; y <= 5; y++) {
+        float yy = corner.y() - 90;
+        for (float y = 1; y <= 3; y++) {
             for (float x = 1; x <= 5; x++) {
-
-                GameObject learAlon = new GameObject(Vector2.ZERO, Vector2.ONES.mult(Block.SIZE), new RectangleRenderable(new Color(50, 200, 30)));
-                learAlon.setTopLeftCorner(new Vector2(xx+(30*x), yy+(30*y)));
-                learAlon.setCoordinateSpace(CoordinateSpace.CAMERA_COORDINATES);
-                gameObjects.addGameObject(learAlon);
+                if (y < 3 || x != 3) {
+                    GameObject learAlon = new GameObject(Vector2.ZERO, Vector2.ONES.mult(Block.SIZE), new RectangleRenderable(new Color(50, 200, 30)));
+                    learAlon.setTopLeftCorner(new Vector2(xx + (30 * x), yy + (30 * y)));
+                    learAlon.setCoordinateSpace(CoordinateSpace.CAMERA_COORDINATES);
+                    gameObjects.addGameObject(learAlon);
+                }
             }
 
         }
@@ -105,13 +106,13 @@ public class Tree {
         }
     }
 
-    private void makeLeafToTree(String tag,Vector2 corner) {
+    private void makeLeafToTree(String tag, Vector2 corner) {
         switch (tag) {
             case "alon":
-                 makeLeafAlon(corner);
-                 break;
+                makeLeafAlon(corner);
+                break;
             default:
-                 makeLeafEucalyptus(corner);
+                makeLeafEucalyptus(corner);
         }
     }
 
@@ -128,7 +129,8 @@ public class Tree {
                 truck.setTopLeftCorner(positionTrunk(x, truck.getDimensions().y()));
                 truck.setCoordinateSpace(CoordinateSpace.CAMERA_COORDINATES);
                 gameObjects.addGameObject(truck);
-                makeLeafToTree(truck.getTag(),truck.getTopLeftCorner());
+                makeLeafToTree(truck.getTag(), truck.getTopLeftCorner());
+                x += Block.SIZE * 4;
 
             }
         }

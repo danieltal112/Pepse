@@ -14,7 +14,7 @@ import pepse.world.trees.Tree;
  */
 public class PepseGameManager extends GameManager {
     private static final float CYCLE_NIGHT = 30;
-    private static final float CYCLE_SUN = 1200;
+    private static final float CYCLE_SUN = 1500;
 
     /**
      * @param imageReader
