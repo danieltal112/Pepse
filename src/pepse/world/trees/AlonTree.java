@@ -18,8 +18,8 @@ public class AlonTree {
     private Random random = new Random();
 
 
-    private final int MIN_ALON_HEIGHT = 300;
-    private final int MAX_MORE_ALON_HEIGHT = 200;
+    private final int MIN_ALON_HEIGHT = 250;
+    private final int MAX_MORE_ALON_HEIGHT = 150;
 
     //constructor
     public AlonTree(GameObjectCollection gameObjects, int xPlant, Terrain terrain) {
