@@ -3,6 +3,8 @@ package pepse.world.trees;
 import danogl.GameObject;
 import danogl.collisions.GameObjectCollection;
 import danogl.components.CoordinateSpace;
+import danogl.components.ScheduledTask;
+import danogl.components.Transition;
 import danogl.gui.rendering.RectangleRenderable;
 import danogl.util.Vector2;
 import pepse.world.Block;
@@ -39,7 +41,7 @@ public class EucalyptusTree {
     }
 
     private void createTreeEucalyptus() {
-        Block eucalyptus = new Block(Vector2.ZERO, new RectangleRenderable(new Color(100, 80, 80)));
+        Block eucalyptus = new Block(Vector2.ZERO, new RectangleRenderable(new Color(173, 94, 3)));
         eucalyptus.setDimensions(sizeTrunk());
         eucalyptus.setTag("eucalyptus");
         eucalyptus.setTopLeftCorner(positionTrunk(xPlant, eucalyptus.getDimensions().y()));
@@ -48,6 +50,27 @@ public class EucalyptusTree {
         makeLeafEucalyptus(eucalyptus.getTopLeftCorner());
     }
 
+    private void moveLeaf(GameObject learEucalyptus) {
+        new Transition<Float>(
+                learEucalyptus,
+                learEucalyptus.renderer()::setRenderableAngle,
+                0f,
+                15f,
+                Transition.LINEAR_INTERPOLATOR_FLOAT,
+                3,
+                Transition.TransitionType.TRANSITION_BACK_AND_FORTH,null);
+    }
+
+    private void changeSizeLeaf(GameObject learEucalyptus) {
+        new Transition<Float>(
+                learEucalyptus,
+                (Float width) -> learEucalyptus.setDimensions(new Vector2(width,Block.SIZE)),
+                30f,
+                40f,
+                Transition.CUBIC_INTERPOLATOR_FLOAT,
+                10,
+                Transition.TransitionType.TRANSITION_BACK_AND_FORTH,null);
+    }
 
     private void makeLeafEucalyptus(Vector2 corner) {
         float xx = corner.x() - 90;
@@ -55,10 +78,13 @@ public class EucalyptusTree {
         for (float y = 1; y <= 3; y++) {
             for (float x = 1; x <= 5; x++) {
                 if ((y < 3 || x != 3) && random.nextInt(100) > 10) {
-                    GameObject learAlon = new GameObject(Vector2.ZERO, Vector2.ONES.mult(Block.SIZE), new RectangleRenderable(new Color(60, 230, 60)));
-                    learAlon.setTopLeftCorner(new Vector2(xx + (30 * x), yy + (30 * y)));
-                    learAlon.setCoordinateSpace(CoordinateSpace.CAMERA_COORDINATES);
-                    gameObjects.addGameObject(learAlon);
+                    GameObject learEucalyptus = new GameObject(Vector2.ZERO, Vector2.ONES.mult(Block.SIZE), new RectangleRenderable(new Color(48, 144, 48)));
+                    learEucalyptus.setTopLeftCorner(new Vector2(xx + (30 * x), yy + (30 * y)));
+                    learEucalyptus.setCoordinateSpace(CoordinateSpace.CAMERA_COORDINATES);
+                    gameObjects.addGameObject(learEucalyptus);
+
+                    new ScheduledTask(learEucalyptus, (float) random.nextInt(500)/100f, false, () -> moveLeaf(learEucalyptus));
+                    new ScheduledTask(learEucalyptus, (float) random.nextInt(500)/100f, false, () -> changeSizeLeaf(learEucalyptus));
                 }
             }
 

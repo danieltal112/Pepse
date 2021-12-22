@@ -19,7 +19,7 @@ public class Terrain {
     private int groundLayer;
     private Vector2 windowDimensions;
     private int seed;
-    private static final Color BASE_GROUND_COLOR = new Color(212, 123, 74);
+    private static final Color BASE_GROUND_COLOR = new Color(112, 62, 28);
 
     //constructor
     public Terrain(GameObjectCollection gameObjects,
