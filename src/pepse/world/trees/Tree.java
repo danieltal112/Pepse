@@ -1,6 +1,7 @@
 package pepse.world.trees;
 
 import danogl.collisions.GameObjectCollection;
+import danogl.collisions.Layer;
 import pepse.world.Block;
 import pepse.world.Terrain;
 
@@ -58,10 +59,13 @@ public class Tree {
 
         for (int x = minX; x < maxX; x += Block.SIZE) {
             if (randomToPlant()) {
+                //todo
                 treeRandom(x);
+                //new AlonTree(gameObjects, x, terrain);
                 x += Block.SIZE * 2;
             }
         }
+        gameObjects.layers().shouldLayersCollide(Layer.BACKGROUND + 30, Layer.STATIC_OBJECTS, true);
     }
 
     private int[] fixRange(int minX, int maxX) {

@@ -24,11 +24,11 @@ public class Avatar
     }
 
 
-//    public static Avatar create(GameObjectCollection gameObjects,
-//                                int layer,
-//                                Vector2 topLeftCorner,
-//                                UserInputListener inputListener,
-//                                ImageReader imageReader){
-//
-//    }
+    public static Avatar create(GameObjectCollection gameObjects,
+                                int layer,
+                                Vector2 topLeftCorner,
+                                UserInputListener inputListener,
+                                ImageReader imageReader){
+
+    }
 }

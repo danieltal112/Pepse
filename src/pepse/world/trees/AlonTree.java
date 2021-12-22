@@ -2,6 +2,7 @@ package pepse.world.trees;
 
 import danogl.GameObject;
 import danogl.collisions.GameObjectCollection;
+import danogl.collisions.Layer;
 import danogl.components.CoordinateSpace;
 import danogl.components.ScheduledTask;
 import danogl.components.Transition;
@@ -13,10 +14,13 @@ import pepse.world.Terrain;
 import java.awt.*;
 import java.util.Random;
 
+/**
+ *
+ */
 public class AlonTree {
     private GameObjectCollection gameObjects;
-    private int xPlant;
-    private Terrain terrain;
+    private final int xPlant;
+    private final Terrain terrain;
     private Random random = new Random();
 
 
@@ -42,39 +46,16 @@ public class AlonTree {
     }
 
     private void createTreeAlon() {
-        Block alon = new Block(Vector2.ZERO, new RectangleRenderable(new Color(128, 73, 32)));
+        Block alon = new Block(Vector2.ZERO, new RectangleRenderable(new Color(141, 86, 43)));
         alon.setDimensions(sizeTrunk());
         alon.setTag("alon");
         alon.setTopLeftCorner(positionTrunk(xPlant, alon.getDimensions().y()));
         alon.setCoordinateSpace(CoordinateSpace.CAMERA_COORDINATES);
-        gameObjects.addGameObject(alon);
+        //todo
+        gameObjects.addGameObject(alon, Layer.STATIC_OBJECTS + 2);
         makeLeafAlon(alon.getTopLeftCorner());
     }
 
-    private void moveLeaf() {
-    }
-
-    private void moveLeaf(GameObject learAlon) {
-        new Transition<Float>(
-                learAlon,
-                learAlon.renderer()::setRenderableAngle,
-                0f,
-                15f,
-                Transition.LINEAR_INTERPOLATOR_FLOAT,
-                3,
-                Transition.TransitionType.TRANSITION_BACK_AND_FORTH, null);
-    }
-
-    private void changeSizeLeaf(GameObject learAlon) {
-        new Transition<Float>(
-                learAlon,
-                (Float width) -> learAlon.setDimensions(new Vector2(width, Block.SIZE)),
-                30f,
-                40f,
-                Transition.CUBIC_INTERPOLATOR_FLOAT,
-                10,
-                Transition.TransitionType.TRANSITION_BACK_AND_FORTH, null);
-    }
 
     private void makeLeafAlon(Vector2 corner) {
         float xx = corner.x() - 60;
@@ -82,16 +63,15 @@ public class AlonTree {
         for (float y = 1; y <= 6; y++) {
             for (float x = 1; x <= 3; x++) {
                 if ((y < 5 || x != 2) && random.nextInt(100) > 10) {
-                    GameObject learAlon = new GameObject(Vector2.ZERO, Vector2.ONES.mult(Block.SIZE), new RectangleRenderable(new Color(33, 194, 79)));
+                    GameObject learAlon = new leaf(Vector2.ZERO, Vector2.ONES.mult(Block.SIZE), new RectangleRenderable(new Color(33, 194, 79)));
+                    learAlon.physics().preventIntersectionsFromDirection(Vector2.ZERO);
                     learAlon.setTopLeftCorner(new Vector2(xx + (30 * x), yy + (30 * y)));
                     learAlon.setCoordinateSpace(CoordinateSpace.CAMERA_COORDINATES);
-                    gameObjects.addGameObject(learAlon);
-                     new ScheduledTask(learAlon, (float) random.nextInt(500)/100f, false, () -> moveLeaf(learAlon));
-                    new ScheduledTask(learAlon, (float) random.nextInt(500)/100f, false, () -> changeSizeLeaf(learAlon));
-                }
+                    gameObjects.addGameObject(learAlon, Layer.BACKGROUND + 30);}
             }
 
         }
+
     }
 
 }

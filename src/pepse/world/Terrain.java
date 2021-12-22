@@ -19,7 +19,7 @@ public class Terrain {
     private int groundLayer;
     private Vector2 windowDimensions;
     private int seed;
-    private static final Color BASE_GROUND_COLOR = new Color(112, 62, 28);
+    private static final Color BASE_GROUND_COLOR = new Color(140, 76, 9);
 
     //constructor
     public Terrain(GameObjectCollection gameObjects,
@@ -39,7 +39,7 @@ public class Terrain {
      */
     //todo
     public float groundHeightAt(float x) {
-        float c = 2f / 3;
+        float c = 4.5f / 6;
         return (float) windowDimensions.y() * c + x % 100;
     }
 
