@@ -86,7 +86,7 @@ public class AlonTree {
                     learAlon.setTopLeftCorner(new Vector2(xx + (30 * x), yy + (30 * y)));
                     learAlon.setCoordinateSpace(CoordinateSpace.CAMERA_COORDINATES);
                     gameObjects.addGameObject(learAlon);
-                    new ScheduledTask(learAlon, (float) random.nextInt(500)/100f, false, () -> moveLeaf(learAlon));
+                     new ScheduledTask(learAlon, (float) random.nextInt(500)/100f, false, () -> moveLeaf(learAlon));
                     new ScheduledTask(learAlon, (float) random.nextInt(500)/100f, false, () -> changeSizeLeaf(learAlon));
                 }
             }

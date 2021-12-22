@@ -36,6 +36,7 @@ public class PepseGameManager extends GameManager {
         //create ground
         Terrain terrain = new Terrain(gameObjects(), Layer.STATIC_OBJECTS, windowController.getWindowDimensions(), 3);
         terrain.createInRange(0, (int) windowController.getWindowDimensions().x());
+
         //create night
         Night.create(gameObjects(), Layer.FOREGROUND, windowController.getWindowDimensions(), CYCLE_NIGHT);
 
@@ -43,8 +44,7 @@ public class PepseGameManager extends GameManager {
         Sun.create(gameObjects(), Layer.BACKGROUND, windowController.getWindowDimensions(), CYCLE_SUN);
         //create tree
         Tree tree = new Tree(gameObjects(), terrain);
-        tree.createInRange(14, (int) windowController.getWindowDimensions().x());
-
+        tree.createInRange(0, (int) windowController.getWindowDimensions().x());
     }
 
     /**

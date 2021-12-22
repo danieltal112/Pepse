@@ -39,8 +39,8 @@ public class Terrain {
      */
     //todo
     public float groundHeightAt(float x) {
-
-        return (float) 750 + x % 100;
+        float c = 2f / 3;
+        return (float) windowDimensions.y() * c + x % 100;
     }
 
     /**
@@ -78,7 +78,7 @@ public class Terrain {
         }
         fixMinMax[0] = minX;
         int counter = minX;
-        while (counter  <= maxX) {
+        while (counter <= maxX) {
             counter += 30;
         }
         fixMinMax[1] = counter;
