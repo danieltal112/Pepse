@@ -14,12 +14,11 @@ import java.awt.*;
 /**
  *
  */
-public class Night extends Object {
+public class Night {
 
     private static final Float MIDNIGHT_OPACITY = 0.5f;
 
     /**
-     *
      * @param gameObjects
      * @param layer
      * @param windowDimensions
@@ -29,7 +28,7 @@ public class Night extends Object {
     public static GameObject create(GameObjectCollection gameObjects,
                                     int layer,
                                     Vector2 windowDimensions,
-                                    float cycleLength){
+                                    float cycleLength) {
 
         GameObject night = new GameObject(Vector2.ZERO, windowDimensions, new RectangleRenderable(Color.black));
         night.setCoordinateSpace(CoordinateSpace.CAMERA_COORDINATES);
@@ -42,8 +41,8 @@ public class Night extends Object {
                 0f,
                 MIDNIGHT_OPACITY,
                 Transition.CUBIC_INTERPOLATOR_FLOAT,
-                cycleLength/2,
-                Transition.TransitionType.TRANSITION_BACK_AND_FORTH,null);
+                cycleLength / 2,
+                Transition.TransitionType.TRANSITION_BACK_AND_FORTH, null);
 
         return night;
     }

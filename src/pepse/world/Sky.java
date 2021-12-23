@@ -11,12 +11,11 @@ import java.awt.*;
 /**
  *
  */
-public class Sky extends Object {
+public class Sky {
     private static final Color BASIC_SKY_COLOR = Color.decode("#80C6E5");
 
 
     /**
-     *
      * @param gameObjects
      * @param windowDimensions
      * @param skyLayer

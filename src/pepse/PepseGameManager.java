@@ -3,6 +3,9 @@ package pepse;
 import danogl.GameManager;
 import danogl.collisions.Layer;
 import danogl.gui.*;
+import danogl.gui.rendering.Camera;
+import danogl.util.Vector2;
+import pepse.world.Avatar;
 import pepse.world.Sky;
 import pepse.world.Terrain;
 import pepse.world.daynight.Night;
@@ -38,13 +41,18 @@ public class PepseGameManager extends GameManager {
         terrain.createInRange(0, (int) windowController.getWindowDimensions().x());
 
         //create night
-     //   Night.create(gameObjects(), Layer.FOREGROUND, windowController.getWindowDimensions(), CYCLE_NIGHT);
+        Night.create(gameObjects(), Layer.FOREGROUND, windowController.getWindowDimensions(), CYCLE_NIGHT);
 
         //create sun
         Sun.create(gameObjects(), Layer.BACKGROUND, windowController.getWindowDimensions(), CYCLE_SUN);
         //create tree
         Tree tree = new Tree(gameObjects(), terrain);
         tree.createInRange(0, (int) windowController.getWindowDimensions().x());
+        //create avatar
+        Avatar avatar = Avatar.create(gameObjects(), Layer.FOREGROUND, Vector2.ZERO, inputListener, imageReader);
+        setCamera(new Camera(avatar, windowController.getWindowDimensions().mult(0.5f) ,
+                windowController.getWindowDimensions(),
+                windowController.getWindowDimensions()));
     }
 
     /**
