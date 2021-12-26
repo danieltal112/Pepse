@@ -11,17 +11,23 @@ import pepse.util.ColorSupplier;
 import java.awt.*;
 
 /**
- *
+ * The class handles all the ground and blocks, as well as providing information regarding the terrain height.
  */
 public class Terrain {
 
-    private GameObjectCollection gameObjects;
-    private int groundLayer;
-    private Vector2 windowDimensions;
-    private int seed;
+    private  final GameObjectCollection gameObjects;
+    private final int groundLayer;
+    private final Vector2 windowDimensions;
+    private final int seed;
     private static final Color BASE_GROUND_COLOR = new Color(140, 76, 9);
 
-    //constructor
+    /**
+     * Constructor for a Terrain-class object.
+     * @param gameObjects - The collection to which we add the terrain.
+     * @param groundLayer - The layer to which the terrain is added.
+     * @param windowDimensions - The dimensions of the game window.
+     * @param seed - Integer Parameter which is used to generate the terrain height.
+     */
     public Terrain(GameObjectCollection gameObjects,
                    int groundLayer,
                    Vector2 windowDimensions,
@@ -34,13 +40,13 @@ public class Terrain {
     }
 
     /**
-     * @param x
-     * @return
+     * Determines what is the desired ground height at a given point.
+     * @param x - The horizontal value (X-axis) of the given point.
+     * @return - The desired ground height (as float).
      */
-    //todo
     public float groundHeightAt(float x) {
         float c = 4.5f / 6;
-        return (float) windowDimensions.y() * c + x % 100;
+        return windowDimensions.y() * c + x % 100;
     }
 
     /**
