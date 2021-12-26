@@ -47,9 +47,9 @@ public class Terrain {
      * @return - The desired ground height (as float).
      */
     public float groundHeightAt(float x) {
-        return noise(x);
+        float c = 4.5f / 6;
+        return windowDimensions.y() * c + x % 100;
     }
-
 
 
     /**
