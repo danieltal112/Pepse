@@ -15,7 +15,7 @@ import java.awt.*;
  */
 public class Terrain {
 
-    private  final GameObjectCollection gameObjects;
+    private final GameObjectCollection gameObjects;
     private final int groundLayer;
     private final Vector2 windowDimensions;
     private final int seed;
@@ -23,10 +23,11 @@ public class Terrain {
 
     /**
      * Constructor for a Terrain-class object.
-     * @param gameObjects - The collection to which we add the terrain.
-     * @param groundLayer - The layer to which the terrain is added.
+     *
+     * @param gameObjects      - The collection to which we add the terrain.
+     * @param groundLayer      - The layer to which the terrain is added.
      * @param windowDimensions - The dimensions of the game window.
-     * @param seed - Integer Parameter which is used to generate the terrain height.
+     * @param seed             - Integer Parameter which is used to generate the terrain height.
      */
     public Terrain(GameObjectCollection gameObjects,
                    int groundLayer,
@@ -41,13 +42,15 @@ public class Terrain {
 
     /**
      * Determines what is the desired ground height at a given point.
+     *
      * @param x - The horizontal value (X-axis) of the given point.
      * @return - The desired ground height (as float).
      */
     public float groundHeightAt(float x) {
-        float c = 4.5f / 6;
-        return windowDimensions.y() * c + x % 100;
+        return noise(x);
     }
+
+
 
     /**
      * @param minX
@@ -90,4 +93,6 @@ public class Terrain {
         fixMinMax[1] = counter;
         return fixMinMax;
     }
+
+
 }
