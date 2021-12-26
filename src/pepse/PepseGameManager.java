@@ -12,6 +12,8 @@ import pepse.world.daynight.Night;
 import pepse.world.daynight.Sun;
 import pepse.world.trees.Tree;
 
+import java.util.Random;
+
 /**
  *
  */
@@ -37,7 +39,9 @@ public class PepseGameManager extends GameManager {
         Sky.create(gameObjects(), windowController.getWindowDimensions(), Layer.BACKGROUND);
 
         //create ground
-        Terrain terrain = new Terrain(gameObjects(), Layer.STATIC_OBJECTS, windowController.getWindowDimensions(), 3);
+        Random rand = new Random();
+        Terrain terrain = new Terrain(gameObjects(), Layer.STATIC_OBJECTS,
+                windowController.getWindowDimensions(), rand.nextInt());
         terrain.createInRange(0, (int) windowController.getWindowDimensions().x());
 
         //create night
@@ -45,7 +49,7 @@ public class PepseGameManager extends GameManager {
 
         //create sun
         Sun.create(gameObjects(), Layer.BACKGROUND, windowController.getWindowDimensions(), CYCLE_SUN);
-        //create tree
+        //create trees
         Tree tree = new Tree(gameObjects(), terrain);
         tree.createInRange(0, (int) windowController.getWindowDimensions().x());
         //create avatar

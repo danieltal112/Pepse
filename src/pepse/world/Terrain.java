@@ -10,6 +10,9 @@ import pepse.util.ColorSupplier;
 
 import java.awt.*;
 
+import static java.lang.Math.sin;
+import static java.lang.Math.PI;
+
 /**
  * The class handles all the ground and blocks, as well as providing information regarding the terrain height.
  */
@@ -20,6 +23,7 @@ public class Terrain {
     private final Vector2 windowDimensions;
     private final int seed;
     private static final Color BASE_GROUND_COLOR = new Color(140, 76, 9);
+    private final PerlinNoise noise;
 
     /**
      * Constructor for a Terrain-class object.
@@ -37,7 +41,7 @@ public class Terrain {
         this.groundLayer = groundLayer;
         this.windowDimensions = windowDimensions;
         this.seed = seed;
-
+        this.noise = new PerlinNoise(seed);
     }
 
     /**
@@ -48,7 +52,8 @@ public class Terrain {
      */
     public float groundHeightAt(float x) {
         float c = 4.5f / 6;
-        return windowDimensions.y() * c + x % 100;
+        return windowDimensions.y() * c + 75 * noise.noise(x);
+
     }
 
 
