@@ -18,10 +18,11 @@ import static java.lang.Math.PI;
  */
 public class Terrain {
 
+    private static final float GROUND_HEIGHT_PARAM = 4.5f / 6;
+    private static final String GROUND_TAG = "ground";
     private final GameObjectCollection gameObjects;
     private final int groundLayer;
     private final Vector2 windowDimensions;
-    private final int seed;
     private static final Color BASE_GROUND_COLOR = new Color(140, 76, 9);
     private final PerlinNoise noise;
 
@@ -40,7 +41,6 @@ public class Terrain {
         this.gameObjects = gameObjects;
         this.groundLayer = groundLayer;
         this.windowDimensions = windowDimensions;
-        this.seed = seed;
         this.noise = new PerlinNoise(seed);
     }
 
@@ -51,15 +51,14 @@ public class Terrain {
      * @return - The desired ground height (as float).
      */
     public float groundHeightAt(float x) {
-        float c = 4.5f / 6;
-        return windowDimensions.y() * c + 75 * noise.noise(x);
-
+        return windowDimensions.y() * GROUND_HEIGHT_PARAM + noise.noise(x);
     }
 
-
     /**
-     * @param minX
-     * @param maxX
+     * Generates all the ground blocks in a given horizontal array.
+     *
+     * @param minX - The left corner of the array.
+     * @param maxX - The right corner of the array.
      */
     public void createInRange(int minX, int maxX) {
         int[] fixMinMax = fixRange(minX, maxX);
@@ -72,7 +71,7 @@ public class Terrain {
             ground.setDimensions(new Vector2(Block.SIZE, windowDimensions.y() - groundHeightAt(i)));
             ground.setTopLeftCorner(new Vector2(i, groundHeightAt(i)));
             ground.setCoordinateSpace(CoordinateSpace.CAMERA_COORDINATES);
-            ground.setTag("ground");
+            ground.setTag(GROUND_TAG);
             gameObjects.addGameObject(ground, groundLayer);
         }
     }
@@ -96,8 +95,8 @@ public class Terrain {
             counter += 30;
         }
         fixMinMax[1] = counter;
+
         return fixMinMax;
     }
-
 
 }

@@ -2,7 +2,7 @@ package pepse.world;
 
 
 // Given the advice at page 6 of ex_5 instructions, the following code is a perlin-noise implementation
-// found in: https://gist.github.com/Fataho/5b422037a6fdcb21c9134ef34d2fa79a, and have been modified for
+// found in: https://gist.github.com/alksily/7a85a1898e65c936f861ee93516e397d, and have been modified for
 // the purposes of this exercise.
 
 /**
@@ -10,6 +10,7 @@ package pepse.world;
  */
 public class PerlinNoise {
 
+    private static final float ENLARGE_FACTOR = 85;
     private final float seed;
     private long default_size;
     private int[] p;
@@ -59,14 +60,14 @@ public class PerlinNoise {
         float initialSize = size;
 
         while (size >= 1) {
-            value += smoothNoise((x / size), (0f / size), (0f / size)) * size;
+            value +=  smoothNoise((x / size), (0f / size), (0f / size)) * size;
             size /= 2.0;
         }
 
-        return value / initialSize;
+        return (value / initialSize) * ENLARGE_FACTOR;
     }
 
-    public double smoothNoise(double x, double y, double z) {
+    private double smoothNoise(double x, double y, double z) {
         // Offset each coordinate by the seed value
         x += this.seed;
         y += this.seed;
