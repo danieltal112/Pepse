@@ -65,7 +65,6 @@ public class Avatar extends GameObject {
 
         Avatar avatar = new Avatar(topLeftCorner, Vector2.ONES.mult(50), new OvalRenderable(AVATAR_COLOR));
         avatar.setCenter(new Vector2(AVATAR_LOCATION, AVATAR_LOCATION));
-        avatar.setCoordinateSpace(CoordinateSpace.CAMERA_COORDINATES);
         gameObjects.addGameObject(avatar, layer);
         Avatar.inputListener = inputListener;
         return avatar;

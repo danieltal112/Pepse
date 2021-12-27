@@ -46,7 +46,7 @@ public class EucalyptusTree {
         eucalyptus.setDimensions(sizeTrunk());
         eucalyptus.setTag("eucalyptus");
         eucalyptus.setTopLeftCorner(positionTrunk(xPlant, eucalyptus.getDimensions().y()));
-        eucalyptus.setCoordinateSpace(CoordinateSpace.CAMERA_COORDINATES);
+//        eucalyptus.setCoordinateSpace(CoordinateSpace.CAMERA_COORDINATES);
         gameObjects.addGameObject(eucalyptus, Layer.STATIC_OBJECTS + 2);
 
         makeLeafEucalyptus(eucalyptus.getTopLeftCorner());
@@ -82,7 +82,7 @@ public class EucalyptusTree {
                 if ((y < 3 || x != 3) && random.nextInt(100) > 10) {
                     GameObject learEucalyptus = new leaf(Vector2.ZERO, Vector2.ONES.mult(Block.SIZE), new RectangleRenderable(new Color(48, 144, 48)));
                     learEucalyptus.setTopLeftCorner(new Vector2(xx + (30 * x), yy + (30 * y)));
-                    learEucalyptus.setCoordinateSpace(CoordinateSpace.CAMERA_COORDINATES);
+//                    learEucalyptus.setCoordinateSpace(CoordinateSpace.CAMERA_COORDINATES);
                     gameObjects.addGameObject(learEucalyptus, Layer.BACKGROUND + 30);
                 }
             }

@@ -95,7 +95,7 @@ public class Terrain {
             GameObject ground = new Block(Vector2.ZERO, renderable);
             ground.setDimensions(new Vector2(Block.SIZE, windowDimensions.y() - groundHeightAt(i)));
             ground.setTopLeftCorner(new Vector2(i, groundHeightAt(i)));
-            ground.setCoordinateSpace(CoordinateSpace.CAMERA_COORDINATES);
+//            ground.setCoordinateSpace(CoordinateSpace.CAMERA_COORDINATES);
             ground.setTag(GROUND_TAG);
             gameObjects.addGameObject(ground, groundLayer);
         }
