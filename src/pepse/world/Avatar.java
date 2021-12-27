@@ -26,11 +26,10 @@ import pepse.PepseGameManager;
  */
 public class Avatar extends GameObject {
 
-    private static final float VELOCITY_X = 190;
-    private static final float VELOCITY_Y = -220;
-    private static final float GRAVITY = 275;
+    private static final float VELOCITY_X = 250;
+    private static final float VELOCITY_Y = -400;
+    private static final float GRAVITY = 300;
     private static final Color AVATAR_COLOR = Color.DARK_GRAY;
-    private static final float AVATAR_LOCATION = 450;
 
     private static UserInputListener inputListener;
 
@@ -64,7 +63,6 @@ public class Avatar extends GameObject {
                                 ImageReader imageReader) {
 
         Avatar avatar = new Avatar(topLeftCorner, Vector2.ONES.mult(50), new OvalRenderable(AVATAR_COLOR));
-        avatar.setCenter(new Vector2(AVATAR_LOCATION, AVATAR_LOCATION));
         gameObjects.addGameObject(avatar, layer);
         Avatar.inputListener = inputListener;
         return avatar;
