@@ -1,6 +1,7 @@
 package pepse;
 
 import danogl.GameManager;
+import danogl.GameObject;
 import danogl.collisions.Layer;
 import danogl.gui.*;
 import danogl.gui.rendering.Camera;
@@ -19,13 +20,14 @@ import java.util.Random;
  */
 public class PepseGameManager extends GameManager {
     private static final float CYCLE_NIGHT = 30;
-    private static final float CYCLE_SUN = 1500;
+    private static final float CYCLE_SUN = 2100;
+    private WindowController windowController;
 
     /**
-     * @param imageReader
-     * @param soundReader
-     * @param inputListener
-     * @param windowController
+     * @param imageReader      - ImageReader object, used to render the game objects.
+     * @param soundReader      - SoundReader Object, used to supply the sounds in the game.
+     * @param inputListener    - InputListener object, used to get input from the user.
+     * @param windowController - WindowController object.
      */
     @Override
     public void initializeGame(danogl.gui.ImageReader imageReader,
@@ -34,6 +36,8 @@ public class PepseGameManager extends GameManager {
                                WindowController windowController) {
         super.initializeGame(imageReader, soundReader, inputListener,
                 windowController);
+
+        this.windowController = windowController;
 
         //create sky
         Sky.create(gameObjects(), windowController.getWindowDimensions(), Layer.BACKGROUND);
@@ -53,15 +57,24 @@ public class PepseGameManager extends GameManager {
         Tree tree = new Tree(gameObjects(), terrain);
         tree.createInRange(0, (int) windowController.getWindowDimensions().x());
         //create avatar
-        Avatar avatar = Avatar.create(gameObjects(), Layer.FOREGROUND, Vector2.ZERO, inputListener, imageReader);
-        setCamera(new Camera(avatar, windowController.getWindowDimensions().mult(0.5f) ,
+        Avatar avatar = Avatar.create(gameObjects(), Layer.DEFAULT, Vector2.ZERO, inputListener, imageReader);
+        setCamera(new Camera(avatar, windowController.getWindowDimensions().mult(0.5f),
                 windowController.getWindowDimensions(),
                 windowController.getWindowDimensions()));
+        turnCameraOn(avatar);
     }
 
-    /**
-     * @param args
-     */
+    public void turnCameraOn(GameObject object) {
+        this.setCamera(
+                new Camera(
+                        object,            //object to follow
+                        Vector2.ZERO,    //follow the center of the object
+                        windowController.getWindowDimensions(),  //widen the frame a bit
+                        windowController.getWindowDimensions()   //share the window dimensions
+                )
+        );
+    }
+
     public static void main(String[] args) {
         new PepseGameManager().run();
     }

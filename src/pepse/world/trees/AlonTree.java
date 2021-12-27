@@ -65,7 +65,7 @@ public class AlonTree {
                 if ((y < 5 || x != 2) && random.nextInt(100) > 10) {
                     GameObject learAlon = new leaf(Vector2.ZERO, Vector2.ONES.mult(Block.SIZE), new RectangleRenderable(new Color(33, 194, 79)));
                     learAlon.physics().preventIntersectionsFromDirection(Vector2.ZERO);
-                    learAlon.setTopLeftCorner(new Vector2(xx + (30 * x), yy + (30 * y)));
+                    learAlon.setTopLeftCorner(new Vector2(xx + (Block.SIZE * x), yy + (Block.SIZE * y)));
                     learAlon.setCoordinateSpace(CoordinateSpace.CAMERA_COORDINATES);
                     gameObjects.addGameObject(learAlon, Layer.BACKGROUND + 30);}
             }

@@ -1,9 +1,9 @@
 package pepse.world;
+/* Given the advice at page 6 of ex_5 instructions, the following code is loosely based on a perlin-noise
+   implementation found in: https://gist.github.com/alksily/7a85a1898e65c936f861ee93516e397d, and have been
+   heavily modified for the purposes of this exercise.
+ */
 
-
-// Given the advice at page 6 of ex_5 instructions, the following code is a perlin-noise implementation
-// found in: https://gist.github.com/alksily/7a85a1898e65c936f861ee93516e397d, and have been modified for
-// the purposes of this exercise.
 
 /**
  * Generating 2D-noise with a semi-random, continuous form.
@@ -11,6 +11,7 @@ package pepse.world;
 public class PerlinNoise {
 
     private static final float ENLARGE_FACTOR = 85;
+    private static final float SIN_ENLARGE_FACTOR = 70;
     private final float seed;
     private long default_size;
     private int[] p;
@@ -53,6 +54,19 @@ public class PerlinNoise {
 
     }
 
+    /**
+     * The function will return the average of two functions, where the first parameter have twice
+     * the weight as the second one.
+     *
+     * @param x - first parameter.
+     * @param y - second parameter.
+     * @return - The weighted average.
+     */
+    private float unevenAverage(float x, float y) {
+        float result = x + 2 * y;
+        return result / 3;
+    }
+
 
     public float noise(float x) {
         float value = 0;
@@ -60,11 +74,13 @@ public class PerlinNoise {
         float initialSize = size;
 
         while (size >= 1) {
-            value +=  smoothNoise((x / size), (0f / size), (0f / size)) * size;
+            value += smoothNoise((x / size), (0f / size), (0f / size)) * size;
             size /= 2.0;
         }
 
-        return (value / initialSize) * ENLARGE_FACTOR;
+        float noiseFactor = (value / initialSize);
+        float sinFactor = (float) (Math.sin(SIN_ENLARGE_FACTOR * (x + seed)));
+        return unevenAverage(noiseFactor, sinFactor) * ENLARGE_FACTOR;
     }
 
     private double smoothNoise(double x, double y, double z) {

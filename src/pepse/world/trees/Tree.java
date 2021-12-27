@@ -53,7 +53,7 @@ public class Tree {
      */
 
     public void createInRange(int minX, int maxX) {
-        int[] fixMinMax = fixRange(minX, maxX);
+        int[] fixMinMax = Block.fixRange(minX, maxX);
         minX = fixMinMax[0];
         maxX = fixMinMax[1];
 
@@ -68,21 +68,5 @@ public class Tree {
         gameObjects.layers().shouldLayersCollide(Layer.BACKGROUND + 30, Layer.STATIC_OBJECTS, true);
     }
 
-    private int[] fixRange(int minX, int maxX) {
-        int[] fixMinMax = new int[2];
-
-        if (minX >= 0) {
-            minX -= (minX % 30);
-        } else {
-            minX -= (30 + minX % 30) % 30;
-        }
-        fixMinMax[0] = minX;
-        int counter = minX;
-        while (counter + 30 <= maxX) {
-            counter += 30;
-        }
-        fixMinMax[1] = counter;
-        return fixMinMax;
-    }
 }
 
