@@ -18,7 +18,7 @@ import java.util.Random;
  */
 public class PepseGameManager extends GameManager {
     private static final float CYCLE_NIGHT = 30;
-    private static final float CYCLE_SUN = 2100;
+    private static final float CYCLE_SUN = 5000;
     private static final float TEXT_SIZE = 25;
     public static final int INIT_FLY_COUNTER_VAL = 100;
 
