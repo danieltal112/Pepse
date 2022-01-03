@@ -27,6 +27,7 @@ public class Terrain {
     private static final Color BASE_GROUND_COLOR = new Color(140, 76, 9);
     private final PerlinNoise noise;
     private final float groundHeightAtX0;
+    private static final int TERRAIN_DEPTH = 20;
 
     /**
      * Constructor for a Terrain-class object.
@@ -93,7 +94,8 @@ public class Terrain {
         Renderable renderable = new RectangleRenderable(ColorSupplier.approximateColor(BASE_GROUND_COLOR));
         for (int i = minX; i <= maxX; i += Block.SIZE) {
             GameObject ground = new Block(Vector2.ZERO, renderable);
-            ground.setDimensions(new Vector2(Block.SIZE, windowDimensions.y()+ windowDimensions.y()/2 - groundHeightAt(i)));
+            ground.setDimensions(new Vector2(Block.SIZE, Block.SIZE*TERRAIN_DEPTH));
+         //   ground.setDimensions(new Vector2(Block.SIZE, windowDimensions.y()+ windowDimensions.y()/2 - groundHeightAt(i)));
             ground.setTopLeftCorner(new Vector2(i, groundHeightAt(i)));
             ground.setTag(GROUND_TAG);
             gameObjects.addGameObject(ground, groundLayer);

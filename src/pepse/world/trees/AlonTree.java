@@ -48,7 +48,6 @@ public class AlonTree {
         alon.setDimensions(sizeTrunk());
         alon.setTag("alon_tree");
         alon.setTopLeftCorner(positionTrunk(xPlant, alon.getDimensions().y()));
-//        alon.setCoordinateSpace(CoordinateSpace.CAMERA_COORDINATES);
         //todo
         gameObjects.addGameObject(alon, Layer.STATIC_OBJECTS + 2);
         makeLeafAlon(alon.getTopLeftCorner());
@@ -60,11 +59,12 @@ public class AlonTree {
         for (float y = 1; y <= 6; y++) {
             for (float x = 1; x <= 3; x++) {
                 if ((y < 5 || x != 2) && random.nextInt(100) > 10) {
-                    GameObject learAlon = new leaf(Vector2.ZERO, Vector2.ONES.mult(Block.SIZE), new RectangleRenderable(new Color(33, 194, 79)));
-                    learAlon.physics().preventIntersectionsFromDirection(Vector2.ZERO);
-                    learAlon.setTopLeftCorner(new Vector2(xx + (Block.SIZE * x), yy + (Block.SIZE * y)));
-//                    learAlon.setCoordinateSpace(CoordinateSpace.CAMERA_COORDINATES);
-                    gameObjects.addGameObject(learAlon, Layer.BACKGROUND + 30);}
+                    GameObject leafAlon = new leaf(Vector2.ZERO, Vector2.ONES.mult(Block.SIZE), new RectangleRenderable(new Color(33, 194, 79)));
+                    leafAlon.physics().preventIntersectionsFromDirection(Vector2.ZERO);
+                    leafAlon.setTopLeftCorner(new Vector2(xx + (Block.SIZE * x), yy + (Block.SIZE * y)));
+                    //todo
+                    leafAlon.physics().preventIntersectionsFromDirection(Vector2.ZERO);
+                    gameObjects.addGameObject(leafAlon, Layer.BACKGROUND + 30);}
             }
 
         }

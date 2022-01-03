@@ -8,6 +8,9 @@ import danogl.util.Vector2;
 
 import java.awt.*;
 
+/**
+ *
+ */
 public class Sky {
     private static final Color BASIC_SKY_COLOR = Color.decode("#80C6E5");
     private static final String SKY_TAG = "sky";

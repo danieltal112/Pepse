@@ -32,20 +32,24 @@ public class Night {
                                     Vector2 windowDimensions,
                                     float cycleLength) {
 
-        GameObject night = new GameObject(Vector2.ZERO, windowDimensions,
+        GameObject night = new GameObject(
+                Vector2.ZERO,
+                windowDimensions,
                 new RectangleRenderable(Color.black));
+
         night.setCoordinateSpace(CoordinateSpace.CAMERA_COORDINATES);
         night.setTag(NIGHT_TAG);
         gameObjects.addGameObject(night, layer);
 
-        new Transition<> (
+        new Transition<>(
                 night,
                 night.renderer()::setOpaqueness,
                 0f,
                 MIDNIGHT_OPACITY,
                 Transition.CUBIC_INTERPOLATOR_FLOAT,
                 cycleLength / 2,
-                Transition.TransitionType.TRANSITION_BACK_AND_FORTH, null);
+                Transition.TransitionType.TRANSITION_BACK_AND_FORTH,
+                null);
 
         return night;
     }

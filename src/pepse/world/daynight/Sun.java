@@ -4,7 +4,6 @@ import danogl.GameObject;
 import danogl.collisions.GameObjectCollection;
 import danogl.components.CoordinateSpace;
 import danogl.components.Transition;
-import danogl.gui.WindowController;
 import danogl.gui.rendering.OvalRenderable;
 import danogl.util.Vector2;
 
@@ -17,29 +16,8 @@ public class Sun {
 
     private static final String SUN_TAG = "sun";
     private static final float SUN_SIZE = 100;
-    private static final Float INIT_ANGLE = 0f;
-    private static final Float MAX_ANGLE = 360f;
-    private static final Color HALO_COLOR = new Color(255, 255, 0, 20);
-
-
-    /**
-     * Calculates the position of the sun in the sky as a function of its angle.
-     *
-     * @param angle - The angle of the sun's position.
-     * @return - Coordinates for the sun's position.
-     */
-    private static Vector2 circleParameters(float radius, float angle) {
-        float x, y;
-        x = radius * (float) Math.cos(angle + 90);
-        y = radius * (float) Math.sin(angle + 90);
-        return new Vector2(x, y);
-    }
-
-    private static Vector2 calcSunPosition(Vector2 windowDimensions, float sunsAngle) {
-        Vector2 pointsLoc = circleParameters(windowDimensions.y(), sunsAngle);
-        Vector2 positionCorrection = new Vector2(windowDimensions.x(), SUN_SIZE);
-        return pointsLoc.add(positionCorrection);
-    }
+    private static final float INIT_ANGLE = 0f;
+    private static final float MAX_ANGLE = (float) Math.PI * 2;
 
 
     /**
@@ -56,27 +34,36 @@ public class Sun {
                                     Vector2 windowDimensions,
                                     float cycleLength) {
 
-        GameObject sun = new GameObject(Vector2.ZERO,
+        GameObject sun = new GameObject(
+                Vector2.ZERO,
                 new Vector2(SUN_SIZE, SUN_SIZE),
                 new OvalRenderable(Color.YELLOW)
         );
-//        float skyCenterX = windowDimensions.x() / 2;
-//        sun.setCenter(new Vector2(skyCenterX, SUN_SIZE));
+
+        sun.setCenter(new Vector2(windowDimensions.x() / 2,
+                SUN_SIZE));
         sun.setCoordinateSpace(CoordinateSpace.CAMERA_COORDINATES);
         sun.setTag(SUN_TAG);
-        float radius = windowDimensions.y() / 2;
         new Transition<>(
                 sun,
-                (Float angle) -> sun.setCenter(new Vector2((float) (windowDimensions.x() / 2 + radius * Math.cos(angle + 90)),
-                        (float) (windowDimensions.y() / 2 + radius * Math.sin(angle + 90)))),
-                MAX_ANGLE,
+                angle -> sun.setCenter(
+                        new Vector2(
+                                windowDimensions.mult(0.5f)).
+                                add(new Vector2((float)
+                                        Math.sin(angle) *
+                                        windowDimensions.x()
+                                        * (0.35f),
+                                        (float) Math.cos(angle) *
+                                                (-1) *
+                                                windowDimensions.y()
+                                                * (0.47f)))),
                 INIT_ANGLE,
+                MAX_ANGLE,
                 Transition.LINEAR_INTERPOLATOR_FLOAT,
                 cycleLength,
                 Transition.TransitionType.TRANSITION_LOOP,
                 null);
 
-        SunHalo.create(gameObjects, layer, sun, HALO_COLOR);
         gameObjects.addGameObject(sun, layer);
         return sun;
     }

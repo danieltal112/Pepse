@@ -7,7 +7,8 @@ import danogl.gui.rendering.Renderable;
 import danogl.util.Vector2;
 
 /**
- * Base-object for the entire range of rectangles which will be used in the game.
+ * Base-object for the entire range of rectangles which will be
+ * used in the game.
  */
 public class Block extends GameObject {
     public static final int SIZE = 30;
@@ -48,7 +49,6 @@ public class Block extends GameObject {
             counter += Block.SIZE;
         }
         fixMinMax[SECOND_INDEX] = counter;
-
         return fixMinMax;
     }
 }
