@@ -3,23 +3,15 @@ package pepse.world;
 import danogl.GameObject;
 import danogl.collisions.Collision;
 import danogl.collisions.GameObjectCollection;
-import danogl.collisions.Layer;
-import danogl.components.CoordinateSpace;
-import danogl.components.GameObjectPhysics;
 import danogl.components.ScheduledTask;
 import danogl.gui.UserInputListener;
-import danogl.gui.rendering.OvalRenderable;
+import danogl.gui.rendering.AnimationRenderable;
 import danogl.gui.rendering.Renderable;
 import danogl.util.Vector2;
 import danogl.gui.*;
-import danogl.gui.rendering.Renderable;
-import danogl.gui.rendering.Renderable;
 
-import java.awt.*;
 import java.awt.event.KeyEvent;
 
-import danogl.gui.rendering.Renderable;
-import pepse.PepseGameManager;
 
 /**
  * The class is responsible for everything related to the user's avatar object.
@@ -29,9 +21,17 @@ public class Avatar extends GameObject {
     private static final float VELOCITY_X = 250;
     private static final float VELOCITY_Y = -400;
     private static final float GRAVITY = 300;
-    private static final Color AVATAR_COLOR = Color.DARK_GRAY;
+    public static final float AVATAR_SIZE = 30;
 
     private static UserInputListener inputListener;
+    private static boolean avatarFlies = false;
+    private static boolean avatarFalls = false;
+    private static AnimationRenderable standAnimation;
+    private static AnimationRenderable walkAnimation;
+    private static final Renderable[] standRenderable = new Renderable[1];
+    private static final Renderable[] walkRenderable = new Renderable[3];
+    private boolean avatarFacingRight = true;
+
 
     /**
      * Constructor for an Avatar type object.
@@ -61,12 +61,43 @@ public class Avatar extends GameObject {
                                 Vector2 topLeftCorner,
                                 UserInputListener inputListener,
                                 ImageReader imageReader) {
-
-        Avatar avatar = new Avatar(topLeftCorner, Vector2.ONES.mult(50), new OvalRenderable(AVATAR_COLOR));
+        initRenderables(imageReader, "stand");
+        initRenderables(imageReader, "walk");
+        standAnimation = new AnimationRenderable(initRenderables(imageReader, "walk"), 1);
+        initWalkAnimation(imageReader);
+        Avatar avatar = new Avatar(topLeftCorner, new Vector2(AVATAR_SIZE, AVATAR_SIZE), standAnimation);
         gameObjects.addGameObject(avatar, layer);
         Avatar.inputListener = inputListener;
         return avatar;
     }
+
+    private static void initWalkAnimation(ImageReader imageReader) {
+        walkRenderable[0] = imageReader.readImage("Girl-Melee_LeftFoot.png", true);
+        walkRenderable[1] = imageReader.readImage("Girl-Melee_Static.png", true);
+        walkRenderable[2] = imageReader.readImage("Girl-Melee_RightFoot.png", true);
+        walkAnimation = new AnimationRenderable(walkRenderable, 0.1);
+    }
+
+    private static Renderable[] initRenderables(ImageReader imageReader, String typeRender) {
+        switch (typeRender) {
+            case "stand":
+                standRenderable[0] = imageReader.readImage("Girl-Melee_Static.png", true);
+                break;
+            case "walk":
+                walkRenderable[0] = imageReader.readImage("Girl-Melee_LeftFoot.png", true);
+                walkRenderable[1] = imageReader.readImage("Girl-Melee_Static.png", true);
+                walkRenderable[2] = imageReader.readImage("Girl-Melee_RightFoot.png", true);
+                break;
+            default:
+                break;
+        }
+        return standRenderable;
+    }
+
+    public static boolean getAvatarFliesFlag() {
+        return avatarFlies;
+    }
+
 
     @Override
     public void onCollisionEnter(GameObject other, Collision collision) {
@@ -77,19 +108,40 @@ public class Avatar extends GameObject {
     public void update(float deltaTime) {
         super.update(deltaTime);
         float xVel = 0;
-        if (inputListener.isKeyPressed(KeyEvent.VK_LEFT))
+        if (inputListener.isKeyPressed(KeyEvent.VK_LEFT)) {
             xVel -= VELOCITY_X;
-        if (inputListener.isKeyPressed(KeyEvent.VK_RIGHT))
-            xVel += VELOCITY_X;
-        transform().setVelocityX(xVel);
-        if (inputListener.isKeyPressed(KeyEvent.VK_SPACE) && inputListener.isKeyPressed(KeyEvent.SHIFT_DOWN_MASK )) {
-
-            physics().preventIntersectionsFromDirection(null);
-            new ScheduledTask(this, .5f, false,
-                    () -> physics().preventIntersectionsFromDirection(Vector2.ZERO));
-            return;
+            renderer().setIsFlippedHorizontally(avatarFacingRight);
+            renderer().setRenderable(walkAnimation);
         }
-        if (inputListener.isKeyPressed(KeyEvent.VK_SPACE) && getVelocity().y() == 0)
-            transform().setVelocityY(VELOCITY_Y);
+        if (inputListener.isKeyPressed(KeyEvent.VK_RIGHT)) {
+            xVel += VELOCITY_X;
+            renderer().setIsFlippedHorizontally(!avatarFacingRight);
+            renderer().setRenderable(walkAnimation);
+
+        }
+        transform().setVelocityX(xVel);
+
+        if (!inputListener.isKeyPressed(KeyEvent.VK_RIGHT) && !inputListener.isKeyPressed(KeyEvent.VK_LEFT))
+            renderer().setRenderable(standAnimation);
+
+        if (inputListener.isKeyPressed(KeyEvent.VK_SPACE) && inputListener.isKeyPressed(KeyEvent.VK_SHIFT)) {
+            avatarFlies = true;
+            if (!avatarFalls) {
+                transform().setVelocityY(0.45f * VELOCITY_Y);
+                new ScheduledTask(this, .5f, false,
+                        () -> physics().preventIntersectionsFromDirection(Vector2.ZERO));
+                return;
+            }
+        }
+        if (getVelocity().y() == 0) {
+            avatarFlies = false;
+            avatarFalls = false;
+            if (inputListener.isKeyPressed(KeyEvent.VK_SPACE))
+                transform().setVelocityY(VELOCITY_Y);
+        }
+    }
+
+    public static void setAvatarFalls(boolean flag) {
+        avatarFalls = flag;
     }
 }
