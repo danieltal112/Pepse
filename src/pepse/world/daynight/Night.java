@@ -18,13 +18,18 @@ public class Night {
     private static final String NIGHT_TAG = "night";
 
     /**
-     * Generates rectangle according to the window size, and integrates it within the game so that its
-     * appearance will change according to the time factor inside the game.
+     * Generates rectangle according to the window size, and
+     * integrates it within the game so that its
+     * appearance will change according to the time factor
+     * inside the game.
      *
-     * @param gameObjects      - The objects-collection to which the night object will be added.
-     * @param layer            - The rendering layer to which the rectangle will be added.
+     * @param gameObjects      - The objects-collection to which
+     *                         the night object will be added.
+     * @param layer            - The rendering layer to which the
+     *                        rectangle will be added.
      * @param windowDimensions - the dimension of the game window.
-     * @param cycleLength      - The length of a single day-night cycle, in seconds.
+     * @param cycleLength      - The length of a single day-night
+     *                         cycle, in seconds.
      * @return - A pointer to the object that was created.
      */
     public static GameObject create(GameObjectCollection gameObjects,
