@@ -1,6 +1,7 @@
 package pepse;
 
 import danogl.GameManager;
+import danogl.GameObject;
 import danogl.collisions.Layer;
 import danogl.gui.*;
 import danogl.gui.rendering.Camera;
@@ -9,16 +10,17 @@ import danogl.util.Vector2;
 import pepse.world.*;
 import pepse.world.daynight.Night;
 import pepse.world.daynight.Sun;
+import pepse.world.daynight.SunHalo;
 import pepse.world.trees.Tree;
 
+import java.awt.*;
 import java.util.Random;
 
 /**
  *
  */
 public class PepseGameManager extends GameManager {
-    private static final float CYCLE_NIGHT = 30;
-    private static final float CYCLE_SUN = 5000;
+    private static final float CYCLE_LENGTH = 30;
     private static final float TEXT_SIZE = 25;
     public static final int INIT_FLY_COUNTER_VAL = 100;
 
@@ -32,6 +34,7 @@ public class PepseGameManager extends GameManager {
     private int terrainCounter = 0;
     private FlyCounter flyCounter;
     private final Counter currentFlightDuration = new Counter(INIT_FLY_COUNTER_VAL);
+    private static final Color HALO_COLOR = new Color(255, 255, 0, 20);
 
 
     /**
@@ -53,10 +56,12 @@ public class PepseGameManager extends GameManager {
         createGround();
 
         //create night
-        Night.create(gameObjects(), Layer.FOREGROUND, windowController.getWindowDimensions(), CYCLE_NIGHT);
+        Night.create(gameObjects(), Layer.FOREGROUND, windowController.getWindowDimensions(), CYCLE_LENGTH);
 
         //create sun
-        Sun.create(gameObjects(), Layer.BACKGROUND, windowController.getWindowDimensions(), CYCLE_SUN);
+        GameObject sun = Sun.create(gameObjects(), Layer.BACKGROUND, windowController.getWindowDimensions(), CYCLE_LENGTH);
+        //create sunHalo
+        SunHalo.create(gameObjects(), Layer.BACKGROUND, sun, HALO_COLOR);
         //create trees
         this.tree = new Tree(gameObjects(), terrain);
         tree.createInRange((int) initAvatarPlacement.x() - horizontalWindowSize, (int) (initAvatarPlacement.x() + horizontalWindowSize));

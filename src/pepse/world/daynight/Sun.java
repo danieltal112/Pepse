@@ -10,7 +10,8 @@ import danogl.util.Vector2;
 import java.awt.*;
 
 /**
- * The class responsible to everything related to the sun object in the game.
+ * The class responsible to everything related to the sun
+ * object in the game.
  */
 public class Sun {
 
@@ -23,10 +24,13 @@ public class Sun {
     /**
      * Creates a new Sun object in the sky.
      *
-     * @param gameObjects      - The Object-collection to which the sun is added.
-     * @param layer            - The game-layer to which the sun will be rendered in.
+     * @param gameObjects      - The Object-collection to which
+     *                         the sun is added.
+     * @param layer            - The game-layer to which the sun
+     *                         will be rendered in.
      * @param windowDimensions - The dimensions of the game-window.
-     * @param cycleLength      - The length of the sun's cycle in the sky (in seconds).
+     * @param cycleLength      - The length of the sun's cycle in
+     *                         the sky (in seconds).
      * @return
      */
     public static GameObject create(GameObjectCollection gameObjects,
@@ -57,8 +61,8 @@ public class Sun {
                                                 (-1) *
                                                 windowDimensions.y()
                                                 * (0.47f)))),
-                INIT_ANGLE,
-                MAX_ANGLE,
+                0f,
+                (float)Math.PI*2,
                 Transition.LINEAR_INTERPOLATOR_FLOAT,
                 cycleLength,
                 Transition.TransitionType.TRANSITION_LOOP,
