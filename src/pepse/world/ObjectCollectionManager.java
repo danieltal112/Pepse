@@ -12,11 +12,17 @@ public class ObjectCollectionManager {
         this.collection = collection;
     }
 
+    private void addGround() {
+        if (Avatar.getAvatarOrientatinon()) {
+//            int start = (int) (initAvatarPlacement.x() + horizontalWindowSize * terrainCounter);
+//            int end = (int) (initAvatarPlacement.x() + horizontalWindowSize * (terrainCounter + 1));
+//            terrain.createInRange(start, end);
+        }
+    }
+
     public int getCounter() {
         return counter.value();
     }
-
-
 
 
 }

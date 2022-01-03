@@ -181,10 +181,8 @@ public class PepseGameManager extends GameManager {
         } else {
             currentFlightDuration.reset();
             currentFlightDuration.increaseBy(INIT_FLY_COUNTER_VAL);
-
         }
     }
-
 
     public static void main(String[] args) {
         new PepseGameManager().run();

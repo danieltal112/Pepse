@@ -2,14 +2,12 @@ package pepse.world;
 
 import danogl.GameObject;
 import danogl.collisions.GameObjectCollection;
-import danogl.components.CoordinateSpace;
 import danogl.gui.rendering.RectangleRenderable;
 import danogl.gui.rendering.Renderable;
 import danogl.util.Vector2;
 import pepse.util.ColorSupplier;
 
 import java.awt.*;
-import java.util.Random;
 
 /**
  * The class handles all the ground and blocks, as well as providing information regarding the terrain height.
@@ -95,7 +93,6 @@ public class Terrain {
         for (int i = minX; i <= maxX; i += Block.SIZE) {
             GameObject ground = new Block(Vector2.ZERO, renderable);
             ground.setDimensions(new Vector2(Block.SIZE, Block.SIZE*TERRAIN_DEPTH));
-         //   ground.setDimensions(new Vector2(Block.SIZE, windowDimensions.y()+ windowDimensions.y()/2 - groundHeightAt(i)));
             ground.setTopLeftCorner(new Vector2(i, groundHeightAt(i)));
             ground.setTag(GROUND_TAG);
             gameObjects.addGameObject(ground, groundLayer);

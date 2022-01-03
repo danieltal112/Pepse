@@ -31,7 +31,7 @@ public class Avatar extends GameObject {
     private static final Renderable[] standRenderable = new Renderable[1];
     private static final Renderable[] walkRenderable = new Renderable[3];
     private static Vector2 location;
-    private boolean avatarFacingRight = true;
+    private static boolean avatarFacingRight = true;
 
 
     /**
@@ -148,5 +148,9 @@ public class Avatar extends GameObject {
 
     public static float getAvatarLocX() {
         return location.x();
+    }
+
+    public static boolean getAvatarOrientatinon() {
+        return avatarFacingRight;
     }
 }
