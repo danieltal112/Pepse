@@ -32,6 +32,7 @@ public class PepseGameManager extends GameManager {
     private int terrainCounter = 0;
     private FlyCounter flyCounter;
     private final Counter currentFlightDuration = new Counter(INIT_FLY_COUNTER_VAL);
+    private ObjectCollectionManager manager;
 
 
     /**

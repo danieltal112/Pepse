@@ -44,7 +44,7 @@ public class EucalyptusTree {
     private void createTreeEucalyptus() {
         Block eucalyptus = new Block(Vector2.ZERO, new RectangleRenderable(new Color(173, 94, 3)));
         eucalyptus.setDimensions(sizeTrunk());
-        eucalyptus.setTag("eucalyptus");
+        eucalyptus.setTag("eucalyptus_tree");
         eucalyptus.setTopLeftCorner(positionTrunk(xPlant, eucalyptus.getDimensions().y()));
 //        eucalyptus.setCoordinateSpace(CoordinateSpace.CAMERA_COORDINATES);
         gameObjects.addGameObject(eucalyptus, Layer.STATIC_OBJECTS + 2);

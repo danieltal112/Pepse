@@ -66,6 +66,7 @@ public class Tree {
             }
         }
         gameObjects.layers().shouldLayersCollide(Layer.BACKGROUND + 30, Layer.STATIC_OBJECTS, true);
+        gameObjects.layers().shouldLayersCollide(Layer.DEFAULT, Layer.STATIC_OBJECTS + 2, true);
     }
 
 }

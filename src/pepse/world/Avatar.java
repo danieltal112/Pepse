@@ -30,6 +30,7 @@ public class Avatar extends GameObject {
     private static AnimationRenderable walkAnimation;
     private static final Renderable[] standRenderable = new Renderable[1];
     private static final Renderable[] walkRenderable = new Renderable[3];
+    private static Vector2 location;
     private boolean avatarFacingRight = true;
 
 
@@ -68,6 +69,7 @@ public class Avatar extends GameObject {
         Avatar avatar = new Avatar(topLeftCorner, new Vector2(AVATAR_SIZE, AVATAR_SIZE), standAnimation);
         gameObjects.addGameObject(avatar, layer);
         Avatar.inputListener = inputListener;
+        Avatar.location = avatar.getCenter();
         return avatar;
     }
 
@@ -97,7 +99,6 @@ public class Avatar extends GameObject {
     public static boolean getAvatarFliesFlag() {
         return avatarFlies;
     }
-
 
     @Override
     public void onCollisionEnter(GameObject other, Collision collision) {
@@ -143,5 +144,9 @@ public class Avatar extends GameObject {
 
     public static void setAvatarFalls(boolean flag) {
         avatarFalls = flag;
+    }
+
+    public static float getAvatarLocX() {
+        return location.x();
     }
 }

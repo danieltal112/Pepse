@@ -1,11 +1,9 @@
 package pepse.world.trees;
 
 import danogl.GameObject;
+import danogl.collisions.Collision;
 import danogl.collisions.GameObjectCollection;
 import danogl.collisions.Layer;
-import danogl.components.CoordinateSpace;
-import danogl.components.ScheduledTask;
-import danogl.components.Transition;
 import danogl.gui.rendering.RectangleRenderable;
 import danogl.util.Vector2;
 import pepse.world.Block;
@@ -48,14 +46,13 @@ public class AlonTree {
     private void createTreeAlon() {
         Block alon = new Block(Vector2.ZERO, new RectangleRenderable(new Color(141, 86, 43)));
         alon.setDimensions(sizeTrunk());
-        alon.setTag("alon");
+        alon.setTag("alon_tree");
         alon.setTopLeftCorner(positionTrunk(xPlant, alon.getDimensions().y()));
 //        alon.setCoordinateSpace(CoordinateSpace.CAMERA_COORDINATES);
         //todo
         gameObjects.addGameObject(alon, Layer.STATIC_OBJECTS + 2);
         makeLeafAlon(alon.getTopLeftCorner());
     }
-
 
     private void makeLeafAlon(Vector2 corner) {
         float xx = corner.x() - 60;

@@ -10,9 +10,6 @@ import danogl.util.Vector2;
 public class FlyCounter extends GameObject {
 
 
-    private final Counter flyDurationCounter;
-    private final GameObjectCollection gameObjects;
-
     /**
      * Construct a new GameObject instance.
      *
@@ -27,14 +24,7 @@ public class FlyCounter extends GameObject {
     ) {
         super(topLeftCorner, dimensions, new TextRenderable(String.format("Flight power: %d",
                 flyDurationCounter.value())));
-        this.flyDurationCounter = flyDurationCounter;
-        this.gameObjects = gameObjectCollection;
         this.setCoordinateSpace(CoordinateSpace.CAMERA_COORDINATES);
     }
-
-    public int getCounterVal() {
-        return flyDurationCounter.value();
-    }
-
 
 }
