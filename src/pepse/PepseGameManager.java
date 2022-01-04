@@ -23,6 +23,7 @@ public class PepseGameManager extends GameManager {
     private static final float CYCLE_LENGTH = 30;
     private static final float TEXT_SIZE = 25;
     public static final int INIT_FLY_COUNTER_VAL = 100;
+    private static final String AVATAR_TAG = "avatar";
 
     private WindowController windowController;
     private Avatar avatar;
@@ -35,6 +36,7 @@ public class PepseGameManager extends GameManager {
     private FlyCounter flyCounter;
     private final Counter currentFlightDuration = new Counter(INIT_FLY_COUNTER_VAL);
     private static final Color HALO_COLOR = new Color(255, 255, 0, 20);
+    private CollectionManager collectionManager;
 
 
     /**
@@ -68,13 +70,20 @@ public class PepseGameManager extends GameManager {
 
 
         //create avatar
-        this.avatar = Avatar.create(gameObjects(), Layer.DEFAULT, initAvatarPlacement, inputListener,
+        this.avatar = Avatar.create(gameObjects(),
+                Layer.DEFAULT,
+                initAvatarPlacement,
+                inputListener,
                 imageReader);
         turnCameraOn();
+        avatar.setTag(AVATAR_TAG);
         flag = true;
 
 //        Initialize Fly duration counter:
         this.flyCounter = initFlyCounter();
+
+//        Initialize TerrainManager:
+        this.collectionManager = new CollectionManager(horizontalWindowSize, terrain, avatar);
 
 
     }
@@ -159,6 +168,7 @@ public class PepseGameManager extends GameManager {
         }
     }
 
+
     @Override
     public void update(float deltaTime) {
         gameObjects().removeGameObject(flyCounter, Layer.FOREGROUND);
@@ -166,7 +176,7 @@ public class PepseGameManager extends GameManager {
 
         super.update(deltaTime);
         if (flag) {
-//            updateGround();
+            collectionManager.updateTerrain();
             removeObj(2 * horizontalWindowSize);
         }
 

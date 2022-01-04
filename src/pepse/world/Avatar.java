@@ -31,7 +31,7 @@ public class Avatar extends GameObject {
     private static final Renderable[] standRenderable = new Renderable[1];
     private static final Renderable[] walkRenderable = new Renderable[3];
     private static Vector2 location;
-    private static boolean avatarFacingRight = true;
+    private boolean avatarFacingRight = true;
 
 
     /**
@@ -111,12 +111,14 @@ public class Avatar extends GameObject {
         float xVel = 0;
         if (inputListener.isKeyPressed(KeyEvent.VK_LEFT)) {
             xVel -= VELOCITY_X;
-            renderer().setIsFlippedHorizontally(avatarFacingRight);
+            avatarFacingRight = false;
+            renderer().setIsFlippedHorizontally(true);
             renderer().setRenderable(walkAnimation);
         }
         if (inputListener.isKeyPressed(KeyEvent.VK_RIGHT)) {
             xVel += VELOCITY_X;
-            renderer().setIsFlippedHorizontally(!avatarFacingRight);
+            avatarFacingRight = true;
+            renderer().setIsFlippedHorizontally(false);
             renderer().setRenderable(walkAnimation);
 
         }
@@ -150,7 +152,7 @@ public class Avatar extends GameObject {
         return location.x();
     }
 
-    public static boolean getAvatarOrientatinon() {
+    public boolean getAvatarOrientatinon() {
         return avatarFacingRight;
     }
 }

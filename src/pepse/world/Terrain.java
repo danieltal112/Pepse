@@ -92,7 +92,7 @@ public class Terrain {
         Renderable renderable = new RectangleRenderable(ColorSupplier.approximateColor(BASE_GROUND_COLOR));
         for (int i = minX; i <= maxX; i += Block.SIZE) {
             GameObject ground = new Block(Vector2.ZERO, renderable);
-            ground.setDimensions(new Vector2(Block.SIZE, Block.SIZE*TERRAIN_DEPTH));
+            ground.setDimensions(new Vector2(Block.SIZE, Block.SIZE * TERRAIN_DEPTH));
             ground.setTopLeftCorner(new Vector2(i, groundHeightAt(i)));
             ground.setTag(GROUND_TAG);
             gameObjects.addGameObject(ground, groundLayer);
