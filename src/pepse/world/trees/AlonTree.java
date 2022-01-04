@@ -1,7 +1,6 @@
 package pepse.world.trees;
 
 import danogl.GameObject;
-import danogl.collisions.Collision;
 import danogl.collisions.GameObjectCollection;
 import danogl.collisions.Layer;
 import danogl.gui.rendering.RectangleRenderable;
