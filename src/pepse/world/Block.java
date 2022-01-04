@@ -1,7 +1,6 @@
 package pepse.world;
 
 import danogl.GameObject;
-import danogl.collisions.Collision;
 import danogl.components.GameObjectPhysics;
 import danogl.gui.rendering.Renderable;
 import danogl.util.Vector2;
@@ -18,8 +17,11 @@ public class Block extends GameObject {
     /**
      * A constructor for a Block class object.
      *
-     * @param topLeftCorner - The top-left coordinates of the object at the screen.
-     * @param renderable    - Renderable-type object, which provides a visual representation for the block.
+     * @param topLeftCorner - The top-left coordinates
+     *                      of the object at the screen.
+     * @param renderable    - Renderer-type object,
+     *                      which provides a visual
+     *                      representation for the block.
      */
     public Block(Vector2 topLeftCorner, Renderable renderable) {
         super(topLeftCorner, Vector2.ONES.mult(SIZE), renderable);
@@ -29,7 +31,8 @@ public class Block extends GameObject {
     }
 
     /**
-     * The method rounds the values of minX and maxX (representing the edges of a range on the X-axis).
+     * The method rounds the values of minX and maxX (representing
+     * the edges of a range on the X-axis).
      *
      * @param minX - The left-edge corner of the range.
      * @param maxX - The right-edge corner of the range.

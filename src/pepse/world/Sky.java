@@ -12,15 +12,18 @@ import java.awt.*;
  *
  */
 public class Sky {
-    private static final Color BASIC_SKY_COLOR = Color.decode("#80C6E5");
+    private static final Color BASIC_SKY_COLOR =
+            Color.decode("#80C6E5");
     private static final String SKY_TAG = "sky";
 
     /**
      * Creates and adds a sky to the game.
      *
-     * @param gameObjects      - The collection to which we add the sky object.
+     * @param gameObjects      - The collection to which we add
+     *                        the sky object.
      * @param windowDimensions - The dimensions of the game window.
-     * @param skyLayer         - The layer to we which we add the sky object.
+     * @param skyLayer         - The layer to we which we add
+     *                         the sky object.
      * @return - a pointer to the object (sky) that was created.
      */
     public static GameObject create(GameObjectCollection gameObjects,

@@ -9,12 +9,13 @@ import danogl.util.Vector2;
 
 public class FlyCounter extends GameObject {
 
-
     /**
      * Construct a new GameObject instance.
      *
-     * @param topLeftCorner Position of the object, in window coordinates (pixels).
-     *                      Note that (0,0) is the top-left corner of the window.
+     * @param topLeftCorner Position of the object, in window
+     *                     coordinates (pixels).
+     *                      Note that (0,0) is the top-left
+     *                      corner of the window.
      * @param dimensions    Width and height in window coordinates.
      */
     public FlyCounter(Counter flyDurationCounter,
@@ -22,7 +23,8 @@ public class FlyCounter extends GameObject {
                       Vector2 dimensions,
                       GameObjectCollection gameObjectCollection
     ) {
-        super(topLeftCorner, dimensions, new TextRenderable(String.format("Flight power: %d",
+        super(topLeftCorner, dimensions,
+                new TextRenderable(String.format("Flight power: %d",
                 flyDurationCounter.value())));
         this.setCoordinateSpace(CoordinateSpace.CAMERA_COORDINATES);
     }

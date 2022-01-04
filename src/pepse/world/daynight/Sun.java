@@ -10,8 +10,7 @@ import danogl.util.Vector2;
 import java.awt.*;
 
 /**
- * The class responsible to everything related to the sun
- * object in the game.
+ * The class responsible to the sun object in the game.
  */
 public class Sun {
 
@@ -19,6 +18,9 @@ public class Sun {
     private static final float SUN_SIZE = 100;
     private static final float INIT_ANGLE = 0f;
     private static final float MAX_ANGLE = (float) Math.PI * 2;
+    private static final float X_WIDTH = 0.35f;
+    private static final float Y_HIGH = 0.47f;
+
 
 
     /**
@@ -56,13 +58,13 @@ public class Sun {
                                 add(new Vector2((float)
                                         Math.sin(angle) *
                                         windowDimensions.x()
-                                        * (0.35f),
+                                        * (X_WIDTH),
                                         (float) Math.cos(angle) *
                                                 (-1) *
                                                 windowDimensions.y()
-                                                * (0.47f)))),
-                0f,
-                (float)Math.PI*2,
+                                                * (Y_HIGH)))),
+                INIT_ANGLE,
+                MAX_ANGLE,
                 Transition.LINEAR_INTERPOLATOR_FLOAT,
                 cycleLength,
                 Transition.TransitionType.TRANSITION_LOOP,

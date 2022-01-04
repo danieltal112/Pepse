@@ -9,7 +9,8 @@ import java.util.Random;
 
 
 /**
- *
+ * this class responsible to create a random tree in random location
+ * in bound of given to the game
  */
 public class Tree {
 
@@ -17,56 +18,65 @@ public class Tree {
     private Terrain terrain;
     private Random random = new Random();
 
-    //constructor
+    /**
+     * constructor tree
+     *
+     * @param gameObjects - game object collection
+     * @param terrain     - the object of ground of the game
+     */
     public Tree(GameObjectCollection gameObjects, Terrain terrain) {
         this.gameObjects = gameObjects;
         this.terrain = terrain;
     }
 
     /**
-     * @return
+     * this function responsible to create a different trees to the game
+     *
+     * @param minX - start location to create tree
+     * @param maxX - end location to create tree
      */
-    private boolean randomToPlant() {
-        int num = random.nextInt(100);
-        if (num <= 10) {
-            return true;
-        }
-        return false;
-    }
-
-
-    private void treeRandom(int xCoordinate) {
-        int obj = random.nextInt(2);
-        switch (obj) {
-            case 0:
-                new EucalyptusTree(gameObjects, xCoordinate, terrain);
-                break;
-            default:
-                new AlonTree(gameObjects, xCoordinate, terrain);
-        }
-    }
-
-
-    /**
-     * @param minX
-     * @param maxX
-     */
-
     public void createInRange(int minX, int maxX) {
         int[] fixMinMax = Block.fixRange(minX, maxX);
         minX = fixMinMax[0];
         maxX = fixMinMax[1];
-
         for (int x = minX; x < maxX; x += Block.SIZE) {
             if (randomToPlant()) {
-                //todo
                 treeRandom(x);
-                //new AlonTree(gameObjects, x, terrain);
                 x += Block.SIZE * 2;
             }
         }
-        gameObjects.layers().shouldLayersCollide(Layer.BACKGROUND + 30, Layer.STATIC_OBJECTS, true);
-        gameObjects.layers().shouldLayersCollide(Layer.DEFAULT, Layer.STATIC_OBJECTS + 2, true);
+        //collide leaf and tree-truck and ground
+        gameObjects.layers().shouldLayersCollide(
+                Layer.BACKGROUND + 30,
+                Layer.STATIC_OBJECTS, true);
+        //collide avatar and ground and tree-turck
+        gameObjects.layers().shouldLayersCollide(Layer.DEFAULT,
+                Layer.STATIC_OBJECTS, true);
+    }
+
+    /**
+     * Tree planting is done randomly but with a probability of 0.1
+     *
+     * @return true if plant or false if not
+     */
+    private boolean randomToPlant() {
+        int num = random.nextInt(100);
+        return num <= 10;
+    }
+
+    /**
+     * this function is a mini factory that return random tree.
+     * here have somewhat types of tree.
+     *
+     * @param xCoordinate - the place to plant tree
+     */
+    private void treeRandom(int xCoordinate) {
+        boolean obj = random.nextBoolean();
+        if (obj) {
+            new EucalyptusTree(gameObjects, xCoordinate, terrain);
+        } else {
+            new AlonTree(gameObjects, xCoordinate, terrain);
+        }
     }
 
 }

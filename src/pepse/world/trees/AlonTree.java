@@ -21,9 +21,8 @@ public class AlonTree {
     private final Terrain terrain;
     private Random random = new Random();
 
-
-    private final int MIN_ALON_HEIGHT = 250;
-    private final int MAX_MORE_ALON_HEIGHT = 150;
+    private final int MIN_ALON_HEIGHT = 170;
+    private final int MAX_MORE_ALON_HEIGHT = 100;
 
     //constructor
     public AlonTree(GameObjectCollection gameObjects, int xPlant, Terrain terrain) {
@@ -31,6 +30,17 @@ public class AlonTree {
         this.xPlant = xPlant;
         this.terrain = terrain;
         createTreeAlon();
+    }
+
+    private void createTreeAlon() {
+        GameObject alon = new Block(Vector2.ZERO, new RectangleRenderable(new Color(141, 86, 43)));
+        alon.setDimensions(sizeTrunk());
+        alon.setTag("alon_tree");
+        alon.setTopLeftCorner(positionTrunk(xPlant, alon.getDimensions().y()));
+        //todo
+     //   gameObjects.addGameObject(alon, Layer.STATIC_OBJECTS + 2);
+        gameObjects.addGameObject(alon, Layer.STATIC_OBJECTS);
+        makeLeafAlon(alon.getTopLeftCorner());
     }
 
     private Vector2 sizeTrunk() {
@@ -43,15 +53,6 @@ public class AlonTree {
         return new Vector2(x, y);
     }
 
-    private void createTreeAlon() {
-        Block alon = new Block(Vector2.ZERO, new RectangleRenderable(new Color(141, 86, 43)));
-        alon.setDimensions(sizeTrunk());
-        alon.setTag("alon_tree");
-        alon.setTopLeftCorner(positionTrunk(xPlant, alon.getDimensions().y()));
-        //todo
-        gameObjects.addGameObject(alon, Layer.STATIC_OBJECTS + 2);
-        makeLeafAlon(alon.getTopLeftCorner());
-    }
 
     private void makeLeafAlon(Vector2 corner) {
         float xx = corner.x() - 60;
@@ -59,7 +60,7 @@ public class AlonTree {
         for (float y = 1; y <= 6; y++) {
             for (float x = 1; x <= 3; x++) {
                 if ((y < 5 || x != 2) && random.nextInt(100) > 10) {
-                    GameObject leafAlon = new leaf(Vector2.ZERO, Vector2.ONES.mult(Block.SIZE), new RectangleRenderable(new Color(33, 194, 79)));
+                    GameObject leafAlon = new Leaf(Vector2.ZERO, Vector2.ONES.mult(Block.SIZE), new RectangleRenderable(new Color(33, 194, 79)));
                     leafAlon.physics().preventIntersectionsFromDirection(Vector2.ZERO);
                     leafAlon.setTopLeftCorner(new Vector2(xx + (Block.SIZE * x), yy + (Block.SIZE * y)));
                     //todo
