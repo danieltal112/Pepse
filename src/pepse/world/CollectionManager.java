@@ -1,16 +1,15 @@
 package pepse.world;
 
-import danogl.collisions.GameObjectCollection;
-import danogl.util.Vector2;
+import danogl.util.Counter;
 
 public class CollectionManager {
-    private GameObjectCollection collection;
-    private int horizontalWindowSize;
-    private Terrain terrain;
-    private Avatar avatar;
+    private final int chunkSize;
+    private final Terrain terrain;
+    private final Avatar avatar;
+    private final Counter chunkCounter = new Counter(1);
 
     public CollectionManager(float windowDimensionsX, Terrain terrain, Avatar avatar) {
-        this.horizontalWindowSize = (int) windowDimensionsX;
+        this.chunkSize = (int) (windowDimensionsX / 2);
         this.terrain = terrain;
         this.avatar = avatar;
     }
@@ -20,21 +19,23 @@ public class CollectionManager {
     }
 
     private void addGround() {
-        boolean orientation = avatar.getAvatarOrientatinon();
-        int halfScreenSize = horizontalWindowSize / 2;
         int avatarLocX = (int) avatar.getCenter().x();
-        if (avatarLocX % halfScreenSize != 0)
-            return;
         int start, end;
-        if (orientation) {
-            start = avatarLocX + horizontalWindowSize;
-            end = avatarLocX + (2 * horizontalWindowSize);
-        } else {
-            start = avatarLocX - horizontalWindowSize;
-            end = avatarLocX - (2 * horizontalWindowSize);
+        int currentChunk = (avatarLocX / chunkSize);
+        if (currentChunk > chunkCounter.value()) {
+            chunkCounter.increment();
+            start = (avatarLocX / chunkSize) * chunkSize + chunkSize;
+            end = (avatarLocX / chunkSize) * chunkSize + (2 * chunkSize);
+            terrain.createInRange(start, end);
         }
-        terrain.createInRange(start, end);
+        if (currentChunk < chunkCounter.value()) {
+            chunkCounter.decrement();
+            start = avatarLocX - chunkSize;
+            end = avatarLocX - (2 * chunkSize);
+            terrain.createInRange(start, end);
+        }
     }
-
-
 }
+
+
+
